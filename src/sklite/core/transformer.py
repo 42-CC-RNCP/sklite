@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
-import numpy as np
 import pandas as pd
 
 
-class Encoder(ABC):
+class Transformer(ABC):
     @abstractmethod
     def fit(self, X: pd.DataFrame):
         pass
@@ -18,8 +17,3 @@ class Encoder(ABC):
 
     def inverse_transform(self, X: pd.DataFrame) -> pd.DataFrame:
         raise NotImplementedError("This encoder does not support inverse_transform")
-
-class Decoder(ABC):
-    @abstractmethod
-    def decode(self, y: np.ndarray) -> np.ndarray:
-        pass

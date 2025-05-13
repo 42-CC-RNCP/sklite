@@ -1,9 +1,9 @@
 from typing import Optional, Tuple
 from pandas import DataFrame
-from sklite.core.codec import Encoder
+from sklite.core.transformer import Transformer
 
 
-class LabelEncoder(Encoder):
+class LabelEncoder(Transformer):
     def __init__(self, columns: Optional[Tuple[str]] = None):
         self.columns = columns
         self.label_maps = {}
