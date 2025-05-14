@@ -3,7 +3,7 @@ from pandas import DataFrame
 from sklite.core.transformer import Transformer
 
 
-class StandarScaler(Transformer):
+class StandardScaler(Transformer):
     def __init__(self, columns: Optional[Tuple[str]] = None):
         self.columns = columns
         self.means = {}
@@ -21,13 +21,13 @@ class StandarScaler(Transformer):
         for col in self.columns:
             X_new[col] = (X[col] - self.means[col]) / self.stds[col]
         return X_new
-    
+
     def inverse_transform(self, X: DataFrame) -> DataFrame:
         X_new = X.copy()
         for col in self.columns:
             X_new[col] = (X[col] * self.stds[col]) + self.means[col]
         return X_new
-    
+
 
 class MinMaxScaler(Transformer):
     def __init__(self, columns: Optional[Tuple[str]] = None):
@@ -47,7 +47,7 @@ class MinMaxScaler(Transformer):
         for col in self.columns:
             X_new[col] = (X[col] - self.mins[col]) / (self.maxs[col] - self.mins[col])
         return X_new
-    
+
     def inverse_transform(self, X: DataFrame) -> DataFrame:
         X_new = X.copy()
         for col in self.columns:

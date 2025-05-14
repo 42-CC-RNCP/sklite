@@ -11,17 +11,17 @@ def sample_dataframe():
         'income': [50000, 60000, 70000, 80000, 90000],
         'city': ['NY', 'LA', 'NY', 'SF', 'LA']
     })
-    
+
 
 def test_standar_scaler(sample_dataframe):
-    scaler = StandarScaler(columns=['age', 'income'])
+    scaler = StandardScaler(columns=['age', 'income'])
     scaler.fit(sample_dataframe)
     transformed = scaler.transform(sample_dataframe)
-    
+
     # Check if the columns are transformed correctly
     age_transformed = (sample_dataframe['age'] - scaler.means['age']) / scaler.stds['age']
     income_transformed = (sample_dataframe['income'] - scaler.means['income']) / scaler.stds['income']
-    
+
     assert np.allclose(transformed['age'], age_transformed)
     assert np.allclose(transformed['income'], income_transformed)
     assert 'age' in transformed.columns
@@ -36,11 +36,11 @@ def test_minmax_scaler(sample_dataframe):
     scaler = MinMaxScaler(columns=['age', 'income'])
     scaler.fit(sample_dataframe)
     transformed = scaler.transform(sample_dataframe)
-    
+
     # Check if the columns are transformed correctly
     age_transformed = (sample_dataframe['age'] - np.min(sample_dataframe['age'])) / (np.max(sample_dataframe['age']) - np.min(sample_dataframe['age']))
     income_transformed = (sample_dataframe['income'] - np.min(sample_dataframe['income'])) / (np.max(sample_dataframe['income']) - np.min(sample_dataframe['income']))
-    
+
     assert np.allclose(transformed['age'], age_transformed)
     assert np.allclose(transformed['income'], income_transformed)
 
