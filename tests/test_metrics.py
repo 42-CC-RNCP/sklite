@@ -71,3 +71,15 @@ def test_mean_absolute_percentage_error(sample_data):
     assert isinstance(mape_value, float), "MAPE value should be a float"
     assert mape_metric._name == 'Mean Absolute Percentage Error', "Metric name should be 'Mean Absolute Percentage Error'"
     assert mape_metric._description == 'Mean Absolute Percentage Error (MAPE) metric.', "Metric description should be 'Mean Absolute Percentage Error (MAPE) metric.'"
+
+
+def test_accuracy_score(sample_data):
+    y_true, y_pred = sample_data
+    accuracy_metric = AccuracyScore()
+    accuracy_value = accuracy_metric(y_true, y_pred)
+    expected_accuracy = np.mean(y_true == y_pred) if len(y_true) > 0 else 0.0
+    assert np.isclose(accuracy_value, expected_accuracy), f"Expected {expected_accuracy}, but got {accuracy_value}"
+    assert isinstance(accuracy_value, float), "Accuracy value should be a float"
+    assert accuracy_metric._name == 'Accuracy Score', "Metric name should be 'Accuracy Score'"
+    assert accuracy_metric._description == 'Accuracy Score metric.', "Metric description should be 'Accuracy Score metric.'"
+    

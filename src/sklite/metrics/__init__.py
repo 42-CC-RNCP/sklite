@@ -4,6 +4,8 @@ from .mae import MeanAbsoluteError
 from .mape import MeanAbsolutePercentageError
 from .rmse import RootMeanSquaredError
 
+from .accuracy_score import AccuracyScore
+
 
 __all__ = [
     "MeanSquaredError",
@@ -11,4 +13,5 @@ __all__ = [
     "MeanAbsolutePercentageError",
     "RootMeanSquaredError",
     "R2Score",
+    "AccuracyScore",
 ]
