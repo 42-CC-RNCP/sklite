@@ -3,8 +3,8 @@
 ### TODO List
 
 - Implement the `metrics` function for the predict results.
-    - [ ] R2 score
-    - [ ] Mean Absolute Error (MAE)
-    - [ ] Mean Squared Error (MSE)
-    - [ ] Root Mean Squared Error (RMSE)
-    - [ ] Mean Absolute Percentage Error (MAPE)
+    - [x] R2 score
+    - [x] Mean Absolute Error (MAE)
+    - [x] Mean Squared Error (MSE)
+    - [x] Root Mean Squared Error (RMSE)
+    - [x] Mean Absolute Percentage Error (MAPE)
