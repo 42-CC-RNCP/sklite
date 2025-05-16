@@ -3,8 +3,15 @@
 ### TODO List
 
 - Implement the `metrics` function for the predict results.
-    - [x] R2 score
-    - [x] Mean Absolute Error (MAE)
-    - [x] Mean Squared Error (MSE)
-    - [x] Root Mean Squared Error (RMSE)
-    - [x] Mean Absolute Percentage Error (MAPE)
+    - For regression tasks:
+        - [x] R2 score
+        - [x] Mean Absolute Error (MAE)
+        - [x] Mean Squared Error (MSE)
+        - [x] Root Mean Squared Error (RMSE)
+        - [x] Mean Absolute Percentage Error (MAPE)
+    - For classification tasks:
+        - [ ] Accuracy
+        - [ ] Precision
+        - [ ] Recall
+        - [ ] F1 Score
+        - [ ] ROC AUC Score
