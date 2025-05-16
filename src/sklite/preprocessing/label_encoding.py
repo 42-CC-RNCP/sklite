@@ -12,7 +12,7 @@ class LabelEncoder(Transformer):
         if self.columns is None:
             self.columns = X.select_dtypes(include=["object"]).columns.tolist()
         for col in self.columns:
-            unique_values = X[col].unique()
+            unique_values = sorted(X[col].unique())
             self.label_maps[col] = {val: idx for idx, val in enumerate(unique_values)}
         return self
 
@@ -28,3 +28,7 @@ class LabelEncoder(Transformer):
             inv_mapping = {v: k for k, v in self.label_maps[col].items()}
             X_new[col] = X[col].map(inv_mapping)
         return X_new
+    
+    def __repr__(self) -> str:
+        # print the mapping of each column
+        return f"LabelEncoder(label_maps={self.label_maps})"
