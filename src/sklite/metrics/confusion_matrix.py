@@ -29,6 +29,7 @@ class ConfusionMatrix(Metric):
         -------
         np.ndarray
             The confusion matrix.
+            where rows represent true labels and columns represent predicted labels:
             (0, 0): True Negatives
             (0, 1): False Positives
             (1, 0): False Negatives
