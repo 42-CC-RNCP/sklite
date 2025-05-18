@@ -5,6 +5,7 @@ from .mape import MeanAbsolutePercentageError
 from .rmse import RootMeanSquaredError
 
 from .accuracy_score import AccuracyScore
+from .confusion_matrix import ConfusionMatrix
 
 
 __all__ = [
@@ -14,4 +15,5 @@ __all__ = [
     "RootMeanSquaredError",
     "R2Score",
     "AccuracyScore",
+    "ConfusionMatrix",
 ]
