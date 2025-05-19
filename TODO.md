@@ -1,3 +1,14 @@
+[Recorded by: 2025-05-19]
+
+### TODO List
+
+- [ ] data splitter need to consider imbalanced data
+    - [ ] stratified sampling
+    - [ ] stratified k-fold
+- [ ] Implement the `data augmentation` function
+    - [ ] SMOTE
+
+
 [Recorded by: 2025-05-15]
 
 ### TODO List
@@ -10,7 +21,7 @@
         - [x] Root Mean Squared Error (RMSE)
         - [x] Mean Absolute Percentage Error (MAPE)
     - For classification tasks:
-        - [ ] Accuracy
+        - [x] Accuracy
         - [ ] Precision
         - [ ] Recall
         - [ ] F1 Score
