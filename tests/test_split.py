@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
+from collections import Counter
 from sklite.split.function import (
     train_test_split,
     train_val_split,
     train_val_test_split,
     kfold_split,
     stratified_kfold_split,
+    stratified_split,
 )
 
 
@@ -85,3 +87,30 @@ def test_stratified_kfold_distribution():
         assert len(X_train) + len(X_val) == 20
         assert len(np.unique(y_val)) == 2
         assert sorted(np.unique(y_val).tolist()) == [0, 1]
+
+
+
+def test_stratified_split():
+    # Simulate a dataset with imbalanced classes
+    y = np.array([1] * 80 + [0] * 20)
+    X = np.arange(len(y)).reshape(-1, 1)
+
+
+    X_train, y_train, X_test, y_test = stratified_split(X, y, test_size=0.25, random_state=42)
+
+    def label_ratio(labels):
+        counts = Counter(labels)
+        total = sum(counts.values())
+        return {label: count / total for label, count in counts.items()}
+
+    orig_ratio = label_ratio(y)
+    train_ratio = label_ratio(y_train.ravel())
+    test_ratio = label_ratio(y_test.ravel())
+
+    print("Original:", orig_ratio)
+    print("Train:   ", train_ratio)
+    print("Test:    ", test_ratio)
+
+    for label in orig_ratio:
+        assert abs(orig_ratio[label] - train_ratio[label]) < 0.05, f"Train ratio for {label} off"
+        assert abs(orig_ratio[label] - test_ratio[label]) < 0.05, f"Test ratio for {label} off"

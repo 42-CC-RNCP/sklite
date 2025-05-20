@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+from collections import defaultdict
 from typing import Tuple, Generator, Union, List
 
 
@@ -99,6 +100,43 @@ def train_val_test_split(
     y_val = y_np[train_end:val_end] if y is not None else None
     y_test = y_np[val_end:] if y is not None else None
     return X_train, y_train, X_val, y_val, X_test, y_test
+
+
+def stratified_split(
+    X: Union[np.ndarray, pd.DataFrame, List],
+    y: Union[np.ndarray, pd.Series, List],
+    test_size: float = 0.2,
+    shuffle: bool = True,
+    random_state: Union[int, None] = None,
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    X_np, y_np = _to_numpy(X, y)
+    
+    if shuffle:
+        rng = np.random.default_rng(seed=random_state)
+    class_indices = defaultdict(list)
+    for i, label in enumerate(y):
+        class_indices[label].append(i)
+    
+    train_indices = []
+    test_indices = []
+
+    for label, indices in class_indices.items():
+        if shuffle:
+            rng.shuffle(indices)
+        split_point = int(len(indices) * (1 - test_size))
+        train_indices.extend(indices[:split_point])
+        test_indices.extend(indices[split_point:])
+        
+    if shuffle:
+        rng.shuffle(train_indices)
+        rng.shuffle(test_indices)
+
+    return (
+        X_np[train_indices],
+        y_np[train_indices],
+        X_np[test_indices],
+        y_np[test_indices],
+    )
 
 
 def kfold_split(
