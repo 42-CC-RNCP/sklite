@@ -109,6 +109,8 @@ def stratified_split(
     shuffle: bool = True,
     random_state: Union[int, None] = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    if y is None:
+        raise ValueError("y must be provided for stratified splitting")
     X_np, y_np = _to_numpy(X, y)
     
     if shuffle:
